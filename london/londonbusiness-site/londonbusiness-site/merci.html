@@ -1,0 +1,34 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Merci ! — LONDONBUSINESS</title><meta name="robots" content="noindex">
+<style>
+:root{--g:#0f5c3a;--d:#093221;--a:#e8a317;--ink:#1c1a17;--m:#6b665e;--l:#e8e2d8;--bg:#faf8f4}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5}
+.box{width:min(520px,100%);background:#fff;border:1px solid var(--l);border-radius:20px;padding:34px 26px;text-align:center;box-shadow:0 14px 40px #0001}
+.logo{font-weight:800;letter-spacing:.5px}.logo b{color:var(--a)}
+.ok{width:74px;height:74px;border-radius:50%;background:var(--g);color:#fff;font-size:2.4rem;line-height:74px;margin:18px auto}
+h1{font-size:1.6rem;margin:0 0 8px}p{color:var(--m);margin:0 0 14px}
+.steps{text-align:left;background:var(--bg);border-radius:14px;padding:14px 16px;margin:18px 0;font-size:.92rem}.steps div{padding:5px 0}.steps b{color:var(--g)}
+.btn{display:block;width:100%;padding:15px;border-radius:12px;border:0;background:var(--a);color:var(--ink);font-weight:800;font-size:1.05rem;text-decoration:none;cursor:pointer;margin-top:8px}
+.wa{background:#1fa855;color:#fff}.lk{background:none;border:0;color:var(--m);text-decoration:underline;cursor:pointer;margin-top:12px;font:inherit;font-size:.85rem}
+.cd{font-size:.88rem;color:var(--m);margin-top:12px}
+</style></head><body><div class="box">
+<div class="logo">LONDON<b>BUSINESS</b></div>
+<div class="ok">✓</div>
+<h1 id="t">Merci !</h1>
+<p>Votre demande est bien enregistrée. Notre équipe vous contacte très vite.</p>
+<div class="steps"><div><b>1.</b> Nous vous envoyons le catalogue sur WhatsApp ou par email.</div><div><b>2.</b> Nous confirmons prix et disponibilité de vos produits.</div><div><b>3.</b> Découvrez dès maintenant notre offre ci-dessous.</div></div>
+<a class="btn" id="sales" href="#">Découvrir l'offre maintenant</a>
+<a class="btn wa" id="wa" href="#">Nous écrire sur WhatsApp</a>
+<div class="cd" id="cd"></div><button class="lk" id="stop" type="button">Rester sur cette page</button>
+</div>
+<script src="config.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+try{const n=(sessionStorage.getItem("lb_nom")||"").trim().split(/\s+/)[0];if(n)$("t").textContent="Merci "+n.replace(/[<>&"]/g,"")+" !"}catch(_){}
+$("sales").href=CONFIG.SALES_URL;
+$("wa").href="https://wa.me/"+CONFIG.WHATSAPP+"?text="+encodeURIComponent("Bonjour LONDONBUSINESS, je viens de remplir le formulaire.");
+let s=CONFIG.REDIRECT_SECONDS,t;
+function tick(){$("cd").textContent="Redirection vers l'offre dans "+s+" s…";if(s--<=0){clearInterval(t);location.href=CONFIG.SALES_URL}}
+if(s>0){tick();t=setInterval(tick,1000)}
+$("stop").onclick=()=>{clearInterval(t);$("cd").textContent="";$("stop").remove()};
+</script></body></html>
